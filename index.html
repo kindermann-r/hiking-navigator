@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>🥾 Hiking Navigator</title>
+    <meta name="description" content="Mobile-friendly hiking trail navigator with GPS tracking and elevation profile">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-content">
+            <h1 class="logo">🥾 Hiking Navigator</h1>
+            <div class="header-stats" id="headerStats">
+                <span class="stat" id="statDistance">-- km</span>
+                <span class="stat" id="statElevation">↑ -- m</span>
+            </div>
+        </div>
+        <div class="trail-name" id="trailName">Load a track to begin</div>
+    </header>
+
+    <!-- Map Container -->
+    <div id="map"></div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p>Loading track...</p>
+    </div>
+
+    <!-- File Drop Zone -->
+    <div class="drop-zone" id="dropZone">
+        <div class="drop-zone-content">
+            <div class="drop-icon">📁</div>
+            <h2>Drop your track file here</h2>
+            <p>or tap to select a JSON file</p>
+            <input type="file" id="fileInput" accept=".json,application/json,*/*" hidden>
+            <button class="btn btn-primary" id="selectFileBtn">Select File</button>
+        </div>
+    </div>
+
+    <!-- Bottom Panel -->
+    <div class="bottom-panel" id="bottomPanel">
+        <!-- Elevation Chart -->
+        <div class="elevation-container" id="elevationContainer">
+            <canvas id="elevationChart"></canvas>
+            <div class="elevation-stats">
+                <div class="elev-stat">
+                    <span class="elev-label">Min</span>
+                    <span class="elev-value" id="elevMin">-- m</span>
+                </div>
+                <div class="elev-stat">
+                    <span class="elev-label">Max</span>
+                    <span class="elev-value" id="elevMax">-- m</span>
+                </div>
+                <div class="elev-stat">
+                    <span class="elev-label">Gain</span>
+                    <span class="elev-value" id="elevGain">-- m</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="controls">
+            <button class="btn btn-icon" id="btnLocate" title="Find my location">
+                📍
+            </button>
+            <button class="btn btn-icon" id="btnFitTrack" title="Fit track to view">
+                🗺️
+            </button>
+            <button class="btn btn-icon" id="btnLoadNew" title="Load new track">
+                📂
+            </button>
+            <button class="btn btn-icon" id="btnToggleElevation" title="Toggle elevation">
+                📈
+            </button>
+        </div>
+    </div>
+
+    <!-- GPS Status Indicator -->
+    <div class="gps-status" id="gpsStatus">
+        <span class="gps-dot"></span>
+        <span class="gps-text">GPS Off</span>
+    </div>
+
+    <!-- Distance to Trail Indicator -->
+    <div class="distance-indicator" id="distanceIndicator" hidden>
+        <span class="distance-value">--</span>
+        <span class="distance-label">to trail</span>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <!-- App JS -->
+    <script src="app.js"></script>
+</body>
+
+</html>
