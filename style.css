@@ -77,6 +77,14 @@ body {
     padding-top: max(var(--spacing-md), env(safe-area-inset-top));
     transform: translateY(0);
     transition: transform var(--transition-normal);
+    pointer-events: none;
+    /* Allow clicks to pass through to map controls */
+}
+
+/* Restore interactivity for header elements */
+.header-content>*,
+.trail-name {
+    pointer-events: auto;
 }
 
 .header.hidden {
@@ -130,12 +138,20 @@ body {
 }
 
 /* Leaflet Customization */
-.leaflet-control-zoom {
-    border: none !important;
-    box-shadow: var(--shadow-md) !important;
+.leaflet-top {
+    top: 80px;
+    /* Push controls down below the header */
 }
 
-.leaflet-control-zoom a {
+.leaflet-control-zoom,
+.leaflet-control-layers {
+    border: none !important;
+    box-shadow: var(--shadow-md) !important;
+    background: transparent !important;
+}
+
+.leaflet-control-zoom a,
+.leaflet-control-layers-toggle {
     background: var(--bg-card) !important;
     color: var(--text-primary) !important;
     border: 1px solid var(--border-glass) !important;
@@ -143,11 +159,56 @@ body {
     width: 44px !important;
     height: 44px !important;
     line-height: 44px !important;
-    font-size: 1.25rem !important;
+    border-radius: 12px !important;
+    text-decoration: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: background var(--transition-fast), border-color var(--transition-fast);
 }
 
-.leaflet-control-zoom a:hover {
+.leaflet-control-zoom a {
+    font-size: 1.25rem !important;
+    margin-bottom: var(--spacing-xs) !important;
+}
+
+/* Layer Control Specifics */
+.leaflet-control-layers-toggle {
+    background-image: none !important;
+    /* Remove default icon */
+}
+
+/* Custom Layer Icon using CSS mask or internal SVG (simplified to text/icon here for robustness) */
+.leaflet-control-layers-toggle::after {
+    content: '🗺️';
+    font-size: 1.2rem;
+}
+
+.leaflet-control-zoom a:hover,
+.leaflet-control-layers-toggle:hover {
     background: var(--bg-glass) !important;
+    border-color: var(--accent-primary) !important;
+    /* FIX: Removed transform scale to prevent growing */
+}
+
+/* Expanded Layer Control */
+.leaflet-control-layers-expanded {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-glass) !important;
+    border-radius: 16px !important;
+    padding: var(--spacing-sm) !important;
+    backdrop-filter: blur(12px);
+    color: var(--text-primary) !important;
+    font-family: inherit !important;
+}
+
+.leaflet-control-layers-expanded .leaflet-control-layers-list {
+    margin-bottom: 0 !important;
+}
+
+.leaflet-control-layers-separator {
+    border-top: 1px solid var(--border-glass) !important;
+    margin: var(--spacing-xs) 0 !important;
 }
 
 .leaflet-control-attribution {
@@ -156,6 +217,9 @@ body {
     font-size: 0.65rem;
     padding: 2px 6px;
     backdrop-filter: blur(8px);
+    border-radius: 4px;
+    margin-right: 4px;
+    margin-bottom: 4px;
 }
 
 /* Custom Markers */
@@ -499,8 +563,9 @@ body {
 /* GPS Status */
 .gps-status {
     position: fixed;
-    top: 100px;
-    right: var(--spacing-md);
+    top: 90px;
+    left: var(--spacing-md);
+    right: auto;
     z-index: 1000;
     display: flex;
     align-items: center;
@@ -547,8 +612,9 @@ body {
 /* Distance Indicator */
 .distance-indicator {
     position: fixed;
-    top: 140px;
-    right: var(--spacing-md);
+    top: 130px;
+    left: var(--spacing-md);
+    right: auto;
     z-index: 1000;
     display: flex;
     flex-direction: column;
