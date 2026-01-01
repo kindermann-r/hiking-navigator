@@ -45,7 +45,13 @@
 
     <!-- File Drop Zone -->
     <div class="drop-zone hidden" id="dropZone">
-        <button class="close-btn" id="closeDropZone" title="Close">✕</button>
+        <button class="close-btn" id="closeDropZone" aria-label="Close">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
         <div class="drop-zone-content">
             <div class="drop-icon">📁</div>
             <h2>Drop your track file here</h2>

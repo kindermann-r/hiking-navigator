@@ -266,8 +266,8 @@ function drawTrack(coords) {
         lineJoin: 'round'
     }).addTo(state.map);
 
-    // Group layers
-    state.trackLayer = L.layerGroup([glowLine, trackLine]).addTo(state.map);
+    // Group layers using FeatureGroup (supports getBounds)
+    state.trackLayer = L.featureGroup([glowLine, trackLine]).addTo(state.map);
 
     // Start marker
     const startIcon = L.divIcon({
@@ -552,7 +552,12 @@ function locateUser() {
     }
 }
 
-function fitTrackToView() {
+function fitTrackToView(e) {
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
     if (state.trackLayer) {
         state.map.fitBounds(state.trackLayer.getBounds(), { padding: [50, 50] });
     }

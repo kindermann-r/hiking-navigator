@@ -278,29 +278,45 @@ body {
 
 .close-btn {
     position: absolute;
-    top: var(--spacing-lg);
+    /* Use safe area inset for top notch handling, plus spacing */
+    top: max(var(--spacing-lg), env(safe-area-inset-top));
     right: var(--spacing-lg);
-    width: 44px;
-    height: 44px;
-    background: var(--bg-glass);
+    width: 48px;
+    /* Larger touch target */
+    height: 48px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     border: 1px solid var(--border-glass);
     border-radius: 50%;
-    color: var(--text-secondary);
-    font-size: 1.25rem;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    line-height: 1;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    z-index: 2000;
+    /* Ensure it's above everything */
     display: flex;
     align-items: center;
     justify-content: center;
+
+    /* iOS Button Reset */
+    -webkit-appearance: none;
+    appearance: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+
+    transition: all var(--transition-fast);
 }
 
 .close-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.2);
     border-color: var(--accent-primary);
+    transform: scale(1.1);
 }
 
 .close-btn:active {
+    background: rgba(255, 255, 255, 0.3);
     transform: scale(0.95);
 }
 
