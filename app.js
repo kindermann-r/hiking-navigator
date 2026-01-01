@@ -271,8 +271,8 @@ function drawTrack(coords) {
 
     // Start marker
     const startIcon = L.divIcon({
-        className: 'custom-marker start',
-        html: '🚩',
+        className: 'custom-marker-wrapper',
+        html: '<div class="custom-marker start">🚩</div>',
         iconSize: [36, 36],
         iconAnchor: [18, 18]
     });
@@ -282,8 +282,8 @@ function drawTrack(coords) {
 
     // End marker
     const endIcon = L.divIcon({
-        className: 'custom-marker end',
-        html: '🏁',
+        className: 'custom-marker-wrapper',
+        html: '<div class="custom-marker end">🏁</div>',
         iconSize: [36, 36],
         iconAnchor: [18, 18]
     });
