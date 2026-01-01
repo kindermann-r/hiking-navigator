@@ -276,6 +276,34 @@ body {
     pointer-events: none;
 }
 
+.close-btn {
+    position: absolute;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    width: 44px;
+    height: 44px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: 50%;
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border-color: var(--accent-primary);
+}
+
+.close-btn:active {
+    transform: scale(0.95);
+}
+
 .drop-zone-content {
     text-align: center;
     padding: var(--spacing-xl);

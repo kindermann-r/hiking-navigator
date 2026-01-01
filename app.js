@@ -24,6 +24,7 @@ const state = {
 // ============================================
 const elements = {
     dropZone: document.getElementById('dropZone'),
+    closeDropZone: document.getElementById('closeDropZone'),
     fileInput: document.getElementById('fileInput'),
     selectFileBtn: document.getElementById('selectFileBtn'),
     loadingOverlay: document.getElementById('loadingOverlay'),
@@ -99,6 +100,9 @@ function setupEventListeners() {
     // File selection
     elements.selectFileBtn.addEventListener('click', () => elements.fileInput.click());
     elements.fileInput.addEventListener('change', handleFileSelect);
+
+    // Close drop zone
+    elements.closeDropZone.addEventListener('click', hideDropZone);
 
     // Control buttons
     elements.btnLocate.addEventListener('click', locateUser);
@@ -556,6 +560,10 @@ function fitTrackToView() {
 
 function showDropZone() {
     elements.dropZone.classList.remove('hidden');
+}
+
+function hideDropZone() {
+    elements.dropZone.classList.add('hidden');
 }
 
 function toggleElevation() {
