@@ -195,14 +195,35 @@ body {
 .leaflet-control-layers-expanded {
     background: var(--bg-card) !important;
     border: 1px solid var(--border-glass) !important;
-    border-radius: 16px !important;
-    padding: var(--spacing-sm) !important;
+    border-radius: 12px !important;
+    padding: 8px !important;
+    /* Reduced padding */
     backdrop-filter: blur(12px);
     color: var(--text-primary) !important;
     font-family: inherit !important;
+    font-size: 0.9rem !important;
+    /* Smaller text */
+    display: flex !important;
+    flex-direction: column;
+    min-width: 120px;
+    /* Reduced width */
 }
 
-.leaflet-control-layers-expanded .leaflet-control-layers-list {
+/* Force toggle to remain visible when expanded */
+.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+    display: flex !important;
+    width: 100% !important;
+    height: 32px !important;
+    /* Reduced height */
+    border: none !important;
+    background: transparent !important;
+    margin-bottom: 4px !important;
+    /* Reduced margin */
+    border-bottom: 1px solid var(--border-glass) !important;
+    border-radius: 0 !important;
+}
+
+.leaflet-control-layers-list {
     margin-bottom: 0 !important;
 }
 

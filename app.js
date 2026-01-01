@@ -84,13 +84,38 @@ function initMap() {
     });
 
     // Layer control
-    L.control.layers({
+    const layerControl = L.control.layers({
         'Dark': L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             subdomains: 'abcd', maxZoom: 19
         }).addTo(state.map),
         'Street': osmLayer,
         'Topo': topoLayer
     }, null, { position: 'topright' }).addTo(state.map);
+
+    // FIX: Add click toggle to layer control
+    const layerContainer = layerControl.getContainer();
+    const oldToggle = layerContainer.querySelector('.leaflet-control-layers-toggle');
+
+    // Clone to strip Leaflet's internal listeners that cause double-toggling on touch
+    const layerToggle = oldToggle.cloneNode(true);
+    oldToggle.parentNode.replaceChild(layerToggle, oldToggle);
+
+    L.DomEvent.disableClickPropagation(layerContainer);
+
+    // Robust toggle handler
+    function toggleLayers(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (layerContainer.classList.contains('leaflet-control-layers-expanded')) {
+            layerControl.collapse();
+        } else {
+            layerControl.expand();
+        }
+    }
+
+    // Listen to both click and touchstart to catch all interactions
+    layerToggle.addEventListener('click', toggleLayers);
+    layerToggle.addEventListener('touchstart', toggleLayers);
 
     // Position zoom control
     state.map.zoomControl.setPosition('topright');
